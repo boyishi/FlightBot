@@ -5,12 +5,17 @@ from flask import Flask
 from flask_restful import Resource, Api, reqparse
 import pandas as pd
 import ast
-
-print("hello world")
-
+    
 app = Flask(__name__)
 api = Api(app)
 
-data = requests.get('http://amai-test.herokuapp.com/flights?date=2020-01-01')
-converted = json.loads(data.text)
-print(converted[0])
+date = input("Insert date (YYYY-MM-DD): ")
+origin = input("Origin Location (Ex. DFW): ")
+dest = input("Insert Desination (Ex. ORD): ")
+
+data = requests.get(f"http://amai-test.herokuapp.com/flights?date={date}&origin={origin}&destination={dest}")
+res = json.loads(data.text)
+
+print(res)
+
+
